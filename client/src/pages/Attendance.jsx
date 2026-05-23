@@ -1,5 +1,9 @@
 const Attendance = () => {
-  return <h1>Attendance </h1>
+  return (
+    <div>
+      Attendance
+    </div>
+  )
 }
 
 export default Attendance

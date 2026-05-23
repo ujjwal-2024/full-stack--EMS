@@ -1,5 +1,9 @@
 const Employees = () => {
-  return <h1>Employees </h1>
+  return (
+    <div>
+      Employees
+    </div>
+  )
 }
 
 export default Employees

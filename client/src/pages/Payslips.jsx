@@ -1,5 +1,9 @@
 const Payslips = () => {
-  return <h1>Payslips </h1>
+  return (
+    <div>
+      Payslips
+    </div>
+  )
 }
 
 export default Payslips

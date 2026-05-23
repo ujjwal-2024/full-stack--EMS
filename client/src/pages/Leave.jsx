@@ -1,5 +1,11 @@
+import React from 'react'
+
 const Leave = () => {
-  return <h1>Leave </h1>
+  return (
+    <div>
+      Leave
+    </div>
+  )
 }
 
 export default Leave

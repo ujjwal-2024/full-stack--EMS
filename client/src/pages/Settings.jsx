@@ -1,5 +1,11 @@
+
+
 const Settings = () => {
-  return <h1>Settings </h1>
+  return (
+    <div>
+      Settings
+    </div>
+  )
 }
 
 export default Settings
