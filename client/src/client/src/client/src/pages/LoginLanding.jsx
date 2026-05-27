@@ -2,7 +2,7 @@ import { ArrowRightIcon, ShieldIcon, UserIcon } from "lucide-react"
 import { Link } from "react-router-dom"
 import LoginLeftSide from "../components/LoginLeftSide"
 
-const LoginLanding = () => {
+const LoggingLanding = () => {
 
   const portalOptions = [
     {
