@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import "dotenv/config";
 import multer from "multer";
+import path from 'path';
+import { fileURLToPath } from 'url';
 import connectDB from './config/db.js';
 import authRouter from './routes/authRoutes.js';
 import employeesRouter from './routes/EmployeeRoutes.js';
@@ -13,6 +15,9 @@ import dashboardRouter from './routes/dashboardRoutes.js';
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -21,15 +26,13 @@ app.use(cors());
 app.use(express.json());
 app.use(multer().none());
 
-// Routes
-
+// Logging
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
   next();
 });
-app.get('/', (req, res) => {
-  res.send('Hello from the server!');
-});
+
+// API Routes
 app.use('/api/auth',       authRouter);
 app.use('/api/employees',  employeesRouter);
 app.use('/api/profile',    profileRouter);
@@ -37,7 +40,13 @@ app.use('/api/attendance', attendanceRouter);
 app.use('/api/leave',      leaveRouter);
 app.use('/api/payslips',   payslipRouter);
 app.use('/api/dashboard',  dashboardRouter);
-app.use('/api/inngest',    serve({ client: inngest, functions })); // ✅ once, no duplicate
+app.use('/api/inngest',    serve({ client: inngest, functions }));
+
+// Serve React frontend (must be AFTER all API routes)
+app.use(express.static(path.join(__dirname, 'dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 await connectDB();
 app.listen(PORT, () => {
