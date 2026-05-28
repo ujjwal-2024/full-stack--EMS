@@ -4,8 +4,11 @@ import Employee from "../models/Employee.js";
 import LeaveApplication from "../models/leaveApplication.js";
 import Payslip from "../models/Payslip.js";
 
-export const inngest = new Inngest({ id: "worknest-ems" });
-
+export const inngest = new Inngest({
+  id:       "worknest-ems",
+  eventKey: "local",
+  isDev:    true, // ✅ tells Inngest to skip signature verification in dev
+});
 // ── 1. Auto checkout every weekday at 5PM ───────────────────────────────────
 const autoCheckout = inngest.createFunction(
   { id: "auto-checkout", triggers: [{ cron: "0 17 * * 1-5" }] },
@@ -120,14 +123,12 @@ const markAbsentEmployees = inngest.createFunction(
 
       let marked = 0;
       for (const employee of employees) {
-        // Skip if already has attendance record today
         const hasAttendance = await Attendance.findOne({
           employeeId: employee._id,
           date:       today,
         });
         if (hasAttendance) continue;
 
-        // Skip if has approved leave today
         const onLeave = await LeaveApplication.findOne({
           employeeID: employee._id,
           status:     "APPROVED",
@@ -136,7 +137,6 @@ const markAbsentEmployees = inngest.createFunction(
         });
         if (onLeave) continue;
 
-        // Mark as absent
         await Attendance.create({
           employeeId:   employee._id,
           date:         today,
@@ -157,5 +157,5 @@ export const functions = [
   generateMonthlyPayslips,
   autoRejectExpiredLeaves,
   onEmployeeCreated,
-  markAbsentEmployees, // ✅ added
+  markAbsentEmployees,
 ];

@@ -1,4 +1,4 @@
-import Employee from '../models/employee.js';
+import Employee from '../models/Employee.js';
 import Attendance from '../models/attendance.js';
 
 // Clock in / Clock out toggle
