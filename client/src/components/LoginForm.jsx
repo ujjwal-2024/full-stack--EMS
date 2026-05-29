@@ -10,6 +10,9 @@ const LoginForm = ({ role, title, subtitle }) => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
+  const {login} = useAuth()
+  const navigate = useNavigate()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
