@@ -1,1 +1,1 @@
-﻿{"name":"full-stack-ems","version":"1.0.0","scripts":{"build":"cd client && npm install && npm run build"}}
+{"name":"full-stack-ems","version":"1.0.0","scripts":{"build":"cd client && npm install && npm run build && xcopy /E /I /Y dist ..\\server\\dist"}}
