@@ -43,9 +43,9 @@ app.use('/api/dashboard',  dashboardRouter);
 app.use('/api/inngest',    serve({ client: inngest, functions }));
 
 // Serve React frontend (must be AFTER all API routes)
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 app.get('/{*path}', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
 await connectDB();
