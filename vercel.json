@@ -1,1 +1,1 @@
-{"version":2,"builds":[{"src":"server/server.js","use":"@vercel/node","config":{"includeFiles":["client/dist/**"]}}],"routes":[{"src":"/api/(.*)","dest":"server/server.js"},{"src":"/(.*)","dest":"server/server.js"}]}
+{"version":2,"builds":[{"src":"server/server.js","use":"@vercel/node","config":{"includeFiles":["client/dist/**"]}}],"routes":[{"src":"/api/(.*)","dest":"server/server.js"},{"src":"/(.*\\.(js|css|svg|png|jpg|ico|woff2|woff|ttf))","dest":"server/server.js"},{"src":"/(.*)","dest":"server/server.js"}]}
